@@ -2,7 +2,6 @@ import pandas as pd
 import os
 import logging
 
-# Set up logging to track pipeline health - Tesla loves "monitoring"
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def load_raw_data(file_path):
@@ -15,8 +14,6 @@ def load_raw_data(file_path):
         raise FileNotFoundError(f"Missing industrial data file.")
 
     try:
-        # Loading NASA Turbofan data which uses space delimiters
-        # We specify column names to show we understand the data schema
         column_names = ['unit_id', 'cycle', 'setting1', 'setting2', 'setting3'] + \
                        [f's{i}' for i in range(1, 22)]
         
