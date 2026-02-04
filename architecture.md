@@ -1,6 +1,9 @@
 architecture.md
 
 predictive-maintenance-ETL/
+├── dags/               #Airflow DAG 
+│   ├── factory_dag.py
+│   └── factory_etl_dag.py
 ├── data/               # Raw NASA data files
 ├── notebooks/          # Exploratory Data Analysis (EDA)
 ├── src/                
