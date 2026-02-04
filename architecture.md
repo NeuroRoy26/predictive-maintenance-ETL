@@ -1,3 +1,5 @@
+architecture.md
+
 predictive-maintenance-ETL/
 ├── data/               # Raw NASA data files
 ├── notebooks/          # Exploratory Data Analysis (EDA)
