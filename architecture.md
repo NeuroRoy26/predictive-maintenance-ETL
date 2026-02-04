@@ -6,6 +6,7 @@ predictive-maintenance-ETL/
 ├── src/                
 │   ├── ingest.py       # Data loading logic
 │   ├── transform.py    # Cleaning and anomaly detection
+│   ├── database.py     # Handles load phase
 │   └── main.py         # Entry point for the pipeline
 ├── requirements.txt    # List of dependencies
 └── README.md           # Documentation

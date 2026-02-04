@@ -1,29 +1,27 @@
 import logging
 from ingest import load_raw_data
 from transform import clean_sensor_data
+from database import load_to_warehouse
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+def validate_data(df):
+    """Automated Quality Check: Ensures accuracy and completeness."""
+    if df.isnull().values.any():
+        return False, "Null values detected"
+    if len(df) < 100:
+        return False, "Data volume too low - possible ingestion error"
+    return True, "Valid"
 
-def run_pipeline():
-    input_file = 'data/CMaps/train_FD001.txt' 
+def run_automated_pipeline():
+    raw_df = load_raw_data('data/CMaps/train_FD001.txt')
     
-    logging.info("Starting Predictive Maintenance ETL Pipeline...")
-
-    raw_df = load_raw_data(input_file)
+    processed_df = clean_sensor_data(raw_df)
     
-    if raw_df is not None:
-        processed_df = clean_sensor_data(raw_df)
-        
-        if not processed_df.empty:
-            logging.info(f"Pipeline Complete. Processed {processed_df.shape[0]} valid records.")
-            
-            output_path = 'data/processed_sensor_data.csv'
-            processed_df.to_csv(output_path, index=False)
-            logging.info(f"Cleaned data saved to {output_path}")
-        else:
-            logging.warning("Transformation resulted in an empty dataset. Check sensor variance.")
+    is_valid, msg = validate_data(processed_df)
+    
+    if is_valid:
+        load_to_warehouse(processed_df)
     else:
-        logging.error("Pipeline failed during the ingestion stage.")
+        logging.critical(f"Pipeline Halted: {msg}")
 
 if __name__ == "__main__":
-    run_pipeline()
+    run_automated_pipeline()
