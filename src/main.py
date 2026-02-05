@@ -2,6 +2,7 @@ import logging
 from ingest import load_raw_data
 from transform import clean_sensor_data
 from database import load_to_warehouse
+import pandas as pd
 
 def validate_data(df):
     """Automated Quality Check: Ensures accuracy and completeness."""
@@ -36,7 +37,6 @@ def check_global_quality(datasets):
     
     report = {}
     for ds in datasets:
-        # Check if the table exists and has data
         count = pd.read_sql(f"SELECT COUNT(*) FROM sensor_readings WHERE unit_id LIKE '{ds}%'", conn).iloc[0,0]
         
         # Logic: If a dataset has < 100 rows, it's a 'Failure' in a high-volume factory

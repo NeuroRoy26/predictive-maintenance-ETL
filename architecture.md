@@ -52,3 +52,20 @@ To address the JD requirement for "accuracy and completeness of data," the pipel
 Schema Enforcement: Explicitly naming and typing columns during ingestion to prevent data drift.
 
 Logging: Every stage of the pipeline records its status, allowing engineers to "identify, analyze, and address complex data issues" quickly.
+
+4. Orchestration & Scalability (Advanced)
+
+A. Directed Acyclic Graph (DAG) Design
+To simulate high-volume factory operations, the pipeline is orchestrated using Apache Airflow.
+Parallel Processing: The system dynamically generates parallel tasks to process multiple sensor streams (FD001-FD004) simultaneously, mimicking the concurrent assembly lines in a shop floor environment.
+Fault Tolerance: Automated retries and task monitoring ensure reliable data flows even if a single ingestion source fails.
+
+B. Relational Storage Layer (SQL)
+Instead of static flat files, cleaned data is loaded into an indexed SQL database.
+Implementation: Utilizes SQLAlchemy to manage the Load phase into a relational structure.
+Optimization: Implements database indexing on critical keys (`unit_id`, `cycle`) to ensure high-performance data extraction for real-time dashboards.
+
+5. Data Quality Gateway
+A final "Quality Gate" task runs after all parallel ETL processes are complete.
+Validation: It cross-references row counts and schema health across all datasets before signaling a "Success" state.
+Impact: Ensures 100% data completeness and accuracy before the data is accessible to downstream manufacturing teams.

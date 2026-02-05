@@ -3,4 +3,6 @@ numpy==1.26.0
 scipy==1.11.0
 matplotlib==3.8.0
 sqlalchemy==2.0.0
-"NASA Turbofan Jet Engine Dataset https://www.kaggle.com/datasets/behrad3d/nasa-cmaps"
+
+# Dataset Source: NASA Turbofan Jet Engine Dataset
+# https://www.kaggle.com/datasets/behrad3d/nasa-cmaps
