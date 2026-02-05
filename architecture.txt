@@ -1,4 +1,4 @@
-architecture.md
+architecture.txt
 
 predictive-maintenance-ETL/
 ├── dags/               #Airflow DAG 
