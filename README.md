@@ -28,4 +28,4 @@ python src/main.py
 Quality Gateway: A final task that validates all parallel streams before database finalization.
 Traceability: Comprehensive logging for real-time "monitoring and troubleshooting.
 
-*For detailed logic on signal processing and schema enforcement, please refer to architecture.md*
+*For detailed logic on signal processing and schema enforcement, please refer to architecture.txt*
